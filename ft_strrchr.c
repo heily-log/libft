@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 05:06:55 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/05/28 06:07:17 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 08:30:38 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	size;
-	char	*str;
+	size_t			i;
+	size_t			size;
+	char			*str;
+	unsigned char	c1;
 
 	str = (char *)s;
-	if (c == '\0')
+	c1 = (unsigned char)c;
+	if (*s == '\0' && c1 != 0)
+		return (NULL);
+	if (c1 == '\0')
 	{
 		i = ft_strlen(str);
 		return (&str[i]);
 	}
-	if (c < 0)
-		c = c % 128 + 128;
-	if (c > 127)
-		c %= 128;
 	size = ft_strlen(str) - 1;
-	str = (char *)s;
-	while (str[size] != c && size > 0)
+	while (str[size] != c1 && size > 0)
 		size--;
-	if (str[size] == c)
+	if (str[size] == c1)
 		return (&str[size]);
 	return (NULL);
 }

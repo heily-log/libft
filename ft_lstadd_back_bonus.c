@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 23:43:32 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/08 05:56:45 by hakobaya         ###   ########.fr       */
+/*   Created: 2023/06/09 05:28:51 by hakobaya          #+#    #+#             */
+/*   Updated: 2023/06/10 06:48:15 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	len;
+	t_list	*ndPtr;
 
-	if (s == NULL)
+	if (lst == NULL)
 		return ;
-	len = ft_strlen(s);
-	write(fd, s, len);
+	if (*lst != NULL)
+	{
+		ndPtr = ft_lstlast(*lst);
+		ndPtr->next = new;
+	}
+	else
+		*lst = new;
 }
+

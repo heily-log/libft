@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 03:19:43 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/03 06:57:00 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 07:52:06 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	d_size;
 	size_t	s_size;
 
-	if (dst == NULL || dstsize == 0 || dstsize < ft_strlen(dst))
+	if (dstsize == 0 || dstsize < ft_strlen(dst))
 		return (dstsize + ft_strlen(src));
 	d_size = ft_strlen(dst);
 	s_size = ft_strlen(src);
@@ -29,7 +29,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		i++;
 	}
 	dst[d_size + i] = '\0';
-	return (d_size + ft_strlen(src));
+	return (d_size + s_size);
 }
 
 //#include <stdio.h>

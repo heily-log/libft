@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 23:43:32 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/08 05:56:45 by hakobaya         ###   ########.fr       */
+/*   Created: 2023/06/09 05:12:41 by hakobaya          #+#    #+#             */
+/*   Updated: 2023/06/10 06:46:14 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	len;
-
-	if (s == NULL)
+	if (lst == NULL || new == NULL)
 		return ;
-	len = ft_strlen(s);
-	write(fd, s, len);
+	new->next = *lst;
+	*lst = new;
 }
+
+//int	main(void)
+//{
+//	t_list	**lst;
+//	t_list	*new;
+
+//	ft_lstadd_front(lst, new);
+//}

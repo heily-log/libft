@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 03:08:40 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/05/27 18:00:35 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 07:59:52 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	*ft_memset(void *buf, int ch, size_t n)
 {
-	int				i;
+	size_t			i;
 	unsigned char	*str;
 	unsigned char	ch2;
 
 	str = (unsigned char *)buf;
 	ch2 = (unsigned char)ch;
 	i = 0;
-	while (i < (int)n)
+	while (i < n)
 	{
 		str[i] = ch2;
 		i++;

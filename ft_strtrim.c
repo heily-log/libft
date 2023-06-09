@@ -6,143 +6,48 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 04:27:43 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/04 06:21:11 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 07:31:51 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
-
-size_t	ft_strlen(const char *s)
+static size_t	search(char const *s1, char const *set)
 {
-	int		i;
-	char	*str;
-
-	i = 0;
-	str = (char *)s;
-	while (s[i] != '\0')
-		i++;
-	return ((size_t) i);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	char	*get;
 	size_t	i;
-	size_t	sum;
+	size_t	j;
 
 	i = 0;
-	sum = count * size;
-	if (size != 0 && count >= SIZE_T_MAX / size)
-		return (NULL);
-	get = (char *)malloc(sizeof(char) * sum);
-	if (!get)
-		return (NULL);
-	while (sum > 0)
+	while (s1[i] != '\0')
 	{
-		get[i] = 0;
-		i++;
-		sum--;
-	}
-	return (get);
-}
-
-//static char	*make_trim(char *buf, char const *s1, char const *set)
-//{
-//	int	i;
-//	int	j;
-
-//	i = 0;
-//	j = 0;
-//	while (s1[i] != '\0')
-//	{
-//		if (s1[i] == set[0])
-//		{
-//			if (ft_strncmp(s1, set, ft_strlen(set)) == 0)
-//				i += ft_strlen(set);
-//		}
-//		else
-//		{
-//			buf[j] = s1[i];
-//			j++;
-//		}
-//		i++;
-//	}
-//	buf[j] = '\0';
-//	return (buf);
-//}
-
-//static int	count(char const *s1, char const *set)
-//{
-//	int	i;
-//	int	count;
-//	int	ans;
-
-//	i = 0;
-//	ans = 0;
-//	count = 0;
-//	while (s1[i] != '\0')
-//	{
-//		if (s1[i] == set[0])
-//		{
-//			if (ft_strncmp(s1, set, ft_strlen(set)) == 0)
-//			{
-//				count += ft_strlen(set);
-//				i += ft_strlen(set);
-//			}
-//		}
-//		i++;
-//	}
-//	return (ft_strlen(s1) - count);
-//}
-
-static int	search(char const *s1, char const *set)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (set[j] != '\0')
-	{
-		while (s1[i] == set[j])
-		{
-			printf("%d[%c] %d[%c]\n", i, s1[i], j, set[j]);
-			i++;
+		j = 0;
+		while (s1[i] != set[j] && set[j] != '\0')
 			j++;
-		}
-		j++;
+		if (set[j] == '\0')
+			break ;
+		i++;
 	}
 	return (i);
 }
 
-static int	rev_search(char const *s1, char const *set)
+static size_t	rev_search(char const *s1, char const *set)
 {
-	int	i;
-	int	j;
-	int	s1len;
-	int	setlen;
+	size_t	i;
+	size_t	j;
+	size_t	s1len;
+	size_t	setlen;
 
 	i = 0;
-	j = 0;
 	s1len = ft_strlen(s1) - 1;
 	setlen = ft_strlen(set) - 1;
-	while (j <= setlen)
+	while (i < ft_strlen(s1))
 	{
-		if (s1[s1len - i] == set[setlen - j])
-		{
-			while (s1[s1len - i] == set[setlen - j] && j <= setlen && i <= s1len)
-			{
-				printf("%d[%c] %d[%c]\n", i, s1[s1len - i], j, set[setlen - j]);
-				i++;
-				j++;
-			}
-			return (i);
-		}
-		j++;
+		j = 0;
+		while (j < ft_strlen(set) && s1[s1len - i] != set[setlen - j])
+			j++;
+		if (j == ft_strlen(set))
+			break ;
+		i++;
 	}
 	return (i);
 }
@@ -150,19 +55,17 @@ static int	rev_search(char const *s1, char const *set)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*trimmed;
-	int		start;
-	int		last;
-	int		len;
-	int		i;
+	size_t	start;
+	size_t	last;
+	size_t	len;
+	size_t	i;
 
 	if (s1 == NULL || set == NULL)
 		return (NULL);
-	//if (searh(s1, set) != 0)
 	start = search(s1, set);
-	printf("start : %d\n", start);
-	//if (rev_search(s1, set) != 0)
 	last = rev_search(s1, set);
-	printf("last : %d\n", last);
+	if (ft_strlen(s1) == last)
+		last = 0;
 	len = ft_strlen(s1) - start - last;
 	trimmed = ft_calloc(len + 1, sizeof(char));
 	if (!trimmed)
@@ -175,40 +78,37 @@ char	*ft_strtrim(char const *s1, char const *set)
 		start++;
 	}
 	trimmed[i] = '\0';
-	return(trimmed);
+	return (trimmed);
 }
-//char	*ft_strtrim(char const *s1, char const *set)
-//{
-//	char	*trimmed;
-//	int		i;
-//	int		j;
 
-//	i = 0;
-//	j = 0;
-//	if (s1 == NULL)
-//		return (NULL);
-//	if (ft_strnstr(s1, set, ft_strlen(s1)) == NULL)
-//		trimmed = ft_calloc(ft_strlen(s1) + 1, sizeof(char));
-//	else
-//		trimmed = ft_calloc(count(s1, set) + 1, sizeof(char));
-//	return (make_trim(trimmed, s1, set));
+//int	main(void)
+//{
+//	char	*s1;
+//	char	*s2;
+//	char	*ret;
+
+//	s1 = "  \t \t \n   \n\n\n\t";
+//	s2 = "";
+//	ret = ft_strtrim(s1, " \n\t");
+//	printf("[%s]\n", ret);
 //}
 
-
-int	main(void)
-{
-	printf("%s\n", ft_strtrim("hello world", "world"));
-	printf("%s\n", ft_strtrim("hello world", "hello"));
-	//ft_strtrim("hello world", "");
-	//ft_strtrim("", "");
-	//ft_strtrim("    hello world     ", " ");
-	//ft_strtrim(" \n\t\r    hello \n\t\r world     \r\t\n\t \r\n", " \n\t\r");
-	//ft_strtrim("hello world", "abcdefghijklmnopqrstuvwxyz");
-	//test("hello world", "world");
-	//test("hello world", "hello");
-	//test("hello world", "");
-	//test("", "");
-	//test("    hello world     ", " ");
-	//test(" \n\t\r    hello \n\t\r world     \r\t\n\t \r\n", " \n\t\r");
-	//test("hello world", "abcdefghijklmnopqrstuvwxyz");
-}
+//int	main(void)
+//{
+//	printf("%s\n", ft_strtrim("hello world", "world"));
+//	printf("%s\n", ft_strtrim("hello world", "hello"));
+//	printf("%s\n", ft_strtrim("hello world", ""));
+//	printf("%s\n", ft_strtrim("", ""));
+//	printf("%s\n", ft_strtrim(",,,hello,,,world,,,42,,,tokyo,,,,", ","));
+//	printf("%s\n", ft_strtrim("    hello world     ", " "));
+//	printf("%s\n", ft_strtrim(" \n\t\r    hello \n\t\r world     \r\t\n\t \r\n",
+//				" \n\t\r"));
+//	printf("%s\n", ft_strtrim("hello world", "abcdefghijklmnopqrstuvwxyz"));
+//	//test("hello world", "world");
+//	//test("hello world", "hello");
+//	//test("hello world", "");
+//	//test("", "");
+//	//test("    hello world     ", " ");
+//	//test(" \n\t\r    hello \n\t\r world     \r\t\n\t \r\n", " \n\t\r");
+//	//test("hello world", "abcdefghijklmnopqrstuvwxyz");
+//}

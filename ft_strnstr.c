@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:01:52 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/01 03:15:05 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 08:37:16 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t		i;
 	size_t		ans;
 
-	if (haystack == (NULL) || ft_strlen(haystack) < ft_strlen(needle))
+	if (haystack == NULL && len == 0)
+		return (NULL);
+	if (ft_strlen(haystack) < ft_strlen(needle))
 		return (NULL);
 	if (ft_strlen(needle) == 0)
 		return ((char *)haystack);
@@ -50,7 +52,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		return (0);
 	i = 0;
 	ans = 0;
-	while (i < len - 1)
+	while (i < len)
 	{
 		if (haystack[i] == *needle)
 		{

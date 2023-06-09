@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:45:01 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/04 00:39:00 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/08 05:10:32 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	str = ft_calloc(len, sizeof(char));
 	if (!str)

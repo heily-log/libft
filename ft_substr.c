@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:09:00 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/04 00:35:20 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 08:43:26 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (s == NULL)
 		return (NULL);
 	s_len = ft_strlen(s);
-	cpy = (char *)malloc(sizeof(char) * (len + 1));
 	if (s_len < start)
-		return (cpy);
+		len = 0;
+	if (s_len - start < len)
+		len = s_len - start;
+	cpy = ft_calloc(len + 1, sizeof(char));
 	if (!(cpy))
 		return (NULL);
 	i = 0;
