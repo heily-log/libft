@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:01:52 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/06/10 08:37:16 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 10:12:20 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static size_t	comp(const char *haystack, const char *needle, size_t n)
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t		i;
-	size_t		ans;
 
 	if (haystack == NULL && len == 0)
 		return (NULL);
@@ -51,15 +50,13 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	if (len == 0)
 		return (0);
 	i = 0;
-	ans = 0;
 	while (i < len)
 	{
 		if (haystack[i] == *needle)
 		{
 			if (min(needle, len - i) < ft_strlen(needle))
 				return (NULL);
-			ans = comp(&haystack[i], needle, ft_strlen(needle));
-			if (ans == 0)
+			if ((comp(&haystack[i], needle, ft_strlen(needle))) == 0)
 				return ((char *)(haystack + i));
 		}
 		i++;

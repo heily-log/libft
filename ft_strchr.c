@@ -6,7 +6,7 @@
 /*   By: hakobaya <hakobaya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 03:55:36 by hakobaya          #+#    #+#             */
-/*   Updated: 2023/05/28 05:54:51 by hakobaya         ###   ########.fr       */
+/*   Updated: 2023/06/10 10:09:06 by hakobaya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	*ft_strchr(const char *s, int c)
 }
 
 //#include <stdio.h>
-//#include <string.h>
 
 //int	main(void)
 //{
@@ -53,5 +52,3 @@ char	*ft_strchr(const char *s, int c)
 //	printf("%s %s\n", ft_strchr(a, 'z'), strchr(a, 'z'));
 //	printf("%s %s\n", ft_strchr(a, '~'), strchr(a, '~'));
 //}
-
-
